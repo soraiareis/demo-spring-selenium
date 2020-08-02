@@ -31,3 +31,10 @@ dependencies {
     testImplementation "org.projectlombok:lombok:$lombok"
     testAnnotationProcessor "org.projectlombok:lombok:$lombok"
 }
+
+test {
+    useTestNG()
+    systemProperties(System.properties)
+    scanForTestClasses = false
+    testLogging.showStandardStreams = true
+}
