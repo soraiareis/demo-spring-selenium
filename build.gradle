@@ -1,3 +1,15 @@
+import net.masterthought.cucumber.ReportBuilder
+import net.masterthought.cucumber.Configuration
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'net.masterthought:cucumber-reporting:5.3.0'
+    }
+}
+
 plugins {
     id 'java'
     id 'idea'
@@ -38,3 +50,31 @@ test {
     scanForTestClasses = false
     testLogging.showStandardStreams = true
 }
+
+def generateReport() {
+    File reportOutputDirectory = new File("build/test-report")
+    reportOutputDirectory.deleteDir()
+
+    def jsonReports = fileTree(dir: "build/test-results").include '**/*.json'.toString()
+    List<String> jsonReportFiles = new ArrayList<String>()
+    jsonReports.each { File file ->
+        jsonReportFiles.add("build/test-results/${file.name}".toString())
+    }
+
+    String projectName = project.name
+
+    Configuration configuration = new Configuration(reportOutputDirectory, projectName)
+    configuration.addClassifications("Version", project.version);
+
+    ReportBuilder reportBuilder = new ReportBuilder(jsonReportFiles, configuration)
+    reportBuilder.generateReports()
+    println("\nReport: file://" + reportOutputDirectory.getCanonicalPath() + "/cucumber-html-reports/overview-features.html")
+}
+
+task generateReport() {
+    doLast {
+        generateReport()
+    }
+}
+
+test.finalizedBy generateReport

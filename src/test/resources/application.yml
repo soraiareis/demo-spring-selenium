@@ -1,1 +1,5 @@
 host: https://soraia.herokuapp.com
+
+logging:
+  level:
+    ROOT: ERROR
