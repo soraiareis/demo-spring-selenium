@@ -2,10 +2,12 @@ package demo.spring.selenium.stepdefinitions;
 
 import demo.spring.selenium.pages.LoginPage;
 import io.cucumber.java.en.When;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class LoginSteps {
 
-  private LoginPage loginPage = new LoginPage(Hooks.driver);
+  @Autowired
+  private LoginPage loginPage;
 
   @When("^I fill the username with \"(.*)\"$")
   public void iFillTheUsernameInputWith(String username) {
