@@ -1,3 +1,6 @@
+context: remote
+browser: firefox
+
 host: https://soraia.herokuapp.com
 
 logging:

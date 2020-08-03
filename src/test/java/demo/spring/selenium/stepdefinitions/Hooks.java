@@ -18,11 +18,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 @Slf4j
 public class Hooks {
 
-  @Autowired
-  private DemoSpringSeleniumProperties properties;
+  @Autowired private DemoSpringSeleniumProperties properties;
 
-  @Autowired
-  private WebDriver driver;
+  @Autowired private WebDriver driver;
 
   @Before
   public void openBrowser(Scenario scenario) {
@@ -38,4 +36,3 @@ public class Hooks {
     log.info("[ENDED] Scenario: " + scenario.getName());
   }
 }
-

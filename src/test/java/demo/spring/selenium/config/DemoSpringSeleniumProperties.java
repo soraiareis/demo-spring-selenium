@@ -14,5 +14,11 @@ public class DemoSpringSeleniumProperties {
 
   @Value("${host}")
   private String host;
+
+  @Value("${browser}")
+  private String browser;
+
+  @Value("${context}")
+  private String context;
 }
 
